@@ -1,0 +1,22 @@
+package com.ardacelep.eventora.entities.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ReservationDtoIU {
+
+    @NotNull(message = "Reservation must be for a ticket. ticketId can not be empty.")
+    private UUID ticketId;
+
+    @NotBlank(message = "Reservation must be in the name of a customer. customerName can not be empty.")
+    private String customerName;
+
+}

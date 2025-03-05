@@ -45,13 +45,13 @@ public class TicketManager implements TicketService {
         Optional<Event> ticketEventOptional = eventDao.findById(eventId);
 
         if (ticketEventOptional.isEmpty()) {
-            throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS,MessageFormat.format("given event does not exist, searched in events for id: {0}", eventId), HttpStatus.BAD_REQUEST);
+            throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS,MessageFormat.format("given event does not exist, searched in events for id: {0}", eventId), HttpStatus.NOT_FOUND);
         }
 
         Event givenEvent = ticketEventOptional.get();
 
         if (tickManHelp.doesTicketExist(givenEvent.getId(), ticketDtoIU.getSeatNumber())){
-            throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS, MessageFormat.format("ticket already exists for seat {0} in the event with the id of: {1} ",ticketDtoIU.getSeatNumber(),givenEvent.getId()), HttpStatus.BAD_REQUEST);
+            throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS, MessageFormat.format("ticket already exists for seat {0} in the event with the id of: {1} ",ticketDtoIU.getSeatNumber(),givenEvent.getId()), HttpStatus.CONFLICT);
         }
 
         Ticket ticket = new Ticket();
@@ -76,7 +76,7 @@ public class TicketManager implements TicketService {
 
         Optional<Ticket> optional = ticketDao.findById(id);
 
-        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("searched in tickets for id: {0}",id), HttpStatus.BAD_REQUEST);
+        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("searched in tickets for id: {0}",id), HttpStatus.NOT_FOUND);
 
         Ticket dbTicket = optional.get();
 
@@ -107,7 +107,7 @@ public class TicketManager implements TicketService {
 
         Optional<Ticket> optional = ticketDao.findById(id);
 
-        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("given ticket does not exist, searched in tickets for id: {0}",id), HttpStatus.BAD_REQUEST);
+        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("given ticket does not exist, searched in tickets for id: {0}",id), HttpStatus.NOT_FOUND);
 
         Ticket dbTicket = optional.get();
 
@@ -138,9 +138,7 @@ public class TicketManager implements TicketService {
 
         if (optionalTicket.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("given ticket does not exist, searched in tickets for event_id: {0} and seat_number: {1} ",eventId,seatNumber), HttpStatus.NOT_FOUND);
 
-        TicketDto responseTicket = tickManHelp.convertTicketToDto(optionalTicket.get(),optionalEvent.get());
-
-        return responseTicket;
+        return tickManHelp.convertTicketToDto(optionalTicket.get(),optionalEvent.get());
 
     }
 

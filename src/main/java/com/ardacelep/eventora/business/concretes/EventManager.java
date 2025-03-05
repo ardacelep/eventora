@@ -37,7 +37,7 @@ public class EventManager implements EventService {
     @Transactional
     public EventDto addEvent(EventDtoIU eventDtoIU) {
 
-        if (evManHelp.doesEventExist(eventDtoIU)) throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS,MessageFormat.format("event with the same name, venue and date already exists || name: {0} | venue: {1} | date: {2}",eventDtoIU.getName(),eventDtoIU.getVenue(),eventDtoIU.getDate()), HttpStatus.BAD_REQUEST);;
+        if (evManHelp.doesEventExist(eventDtoIU)) throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS,MessageFormat.format("event with the same name, venue and date already exists || name: {0} | venue: {1} | date: {2}",eventDtoIU.getName(),eventDtoIU.getVenue(),eventDtoIU.getDate()), HttpStatus.CONFLICT);;
 
         Event newEvent = new Event();
 

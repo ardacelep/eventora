@@ -43,7 +43,7 @@ public class ReservationManager implements ReservationService {
 
         Optional<Ticket> optional = ticketDao.findById(reservationDtoIU.getTicketId());
 
-        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("given ticket does not exist, searched in tickets for id: {0}",reservationDtoIU.getTicketId()), HttpStatus.BAD_REQUEST);
+        if (optional.isEmpty()) throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS, MessageFormat.format("given ticket does not exist, searched in tickets for id: {0}",reservationDtoIU.getTicketId()), HttpStatus.NOT_FOUND);
 
         Ticket reservationTicket = optional.get();
 

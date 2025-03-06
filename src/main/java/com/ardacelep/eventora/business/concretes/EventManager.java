@@ -122,7 +122,7 @@ public class EventManager implements EventService {
 
         List<Event> foundEvents = eventDao.findByNameLike(name);
 
-        if (!foundEvents.isEmpty() && foundEvents != null){
+        if (!foundEvents.isEmpty()){
             for (Event foundEvent : foundEvents) {
 
                 EventDto foundEventDto = evManHelp.convertEventToDto(foundEvent);
@@ -133,7 +133,6 @@ public class EventManager implements EventService {
 
         return eventDtoList;
     }
-
 
 }
 

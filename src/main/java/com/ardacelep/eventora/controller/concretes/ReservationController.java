@@ -32,7 +32,7 @@ public class ReservationController implements IReservationController {
     }
 
     @Override
-    @GetMapping("/findByCustomerName/{customerName}")
+    @GetMapping("/find/customer-name/{customerName}")
     public List<ReservationDto> findReservationsByCustomerNameIgnoreCase(@PathVariable String customerName) {
         return reservationService.findReservationsByCustomerNameIgnoreCase(customerName);
     }
@@ -44,7 +44,7 @@ public class ReservationController implements IReservationController {
     }
 
     @Override
-    @GetMapping("/findById/{id}")
+    @GetMapping("/find/id/{id}")
     public ReservationDto findReservationById(@PathVariable UUID id) {
         return reservationService.findReservationById(id);
     }

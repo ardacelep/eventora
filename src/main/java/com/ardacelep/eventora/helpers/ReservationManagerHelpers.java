@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReservationManagerHelpers {
 
-    @Autowired
-    TicketManagerHelpers tickManHelp;
 
     public ReservationDto convertReservationtoDto(Reservation reservation){
 

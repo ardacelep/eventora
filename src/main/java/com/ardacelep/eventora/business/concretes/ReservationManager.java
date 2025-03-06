@@ -12,11 +12,13 @@ import com.ardacelep.eventora.enums.ReservationStatus;
 import com.ardacelep.eventora.enums.TicketStatus;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
 import com.ardacelep.eventora.helpers.ReservationManagerHelpers;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -36,9 +38,12 @@ public class ReservationManager implements ReservationService {
     @Autowired
     ReservationManagerHelpers resManHelp;
 
+    @PersistenceContext
+    EntityManager entityManager;
+
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ReservationDto makeReservation(ReservationDtoIU reservationDtoIU) {
 
         Optional<Ticket> optional = ticketDao.findById(reservationDtoIU.getTicketId());
@@ -68,13 +73,20 @@ public class ReservationManager implements ReservationService {
 
         reservationTicket.setReservation(reservation);
 
-        Reservation createdReservation = reservationDao.save(reservation);
+        entityManager.flush(); // flush() , transactional ile takip edilen aksiyonların veritabanına
+        // aktarılmasını tetikler. normalde metot bitiminde tetiklenir. burada manuel save yapmak yerine
+        // flush ile tetikleyerek save işlemini gerçekleştirdik ve kaydedilen reservation'ın id alanı
+        // veritabanından gelen id'yle otomatik olarak dolduruldu.
+        // not: metot bitmeden hata fırlatılırsa @Transactional flush ile tetiklenen işlemleri de geri alır.
+        // normalde transactional RuntimeException'ları ve alt sınıflarını yakalar. spring'in transactional'ı
+        // rollbackFor ile içine verilen sınıfları ve tüm alt sınıflarını yakalar.
+        // Exception.class vererek bütün hataların yakalanmasını sağladık.
 
-        return resManHelp.convertReservationtoDto(createdReservation);
+        return resManHelp.convertReservationtoDto(reservation);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ReservationDto cancelReservation(UUID reservationId) {
 
         Optional<Reservation> optional = reservationDao.findById(reservationId);
@@ -88,6 +100,8 @@ public class ReservationManager implements ReservationService {
         dbReservation.setStatus(ReservationStatus.CANCELLED);
 
         dbReservation.getTicket().setStatus(TicketStatus.AVAILABLE);
+
+        entityManager.flush();
 
         return resManHelp.convertReservationtoDto(dbReservation);
     }
@@ -109,7 +123,7 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public ReservationDto activateReservation(UUID reservationId) {
 
         Optional<Reservation> optional = reservationDao.findById(reservationId);
@@ -123,6 +137,8 @@ public class ReservationManager implements ReservationService {
         dbReservation.setStatus(ReservationStatus.ACTIVE);
 
         dbReservation.getTicket().setStatus(TicketStatus.RESERVED);
+
+        entityManager.flush();
 
         return resManHelp.convertReservationtoDto(dbReservation);
     }

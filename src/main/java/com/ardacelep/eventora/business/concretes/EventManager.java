@@ -12,7 +12,7 @@ import com.ardacelep.eventora.entities.dto.EventDtoUpdate;
 import com.ardacelep.eventora.enums.ErrorMessageType;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
 import com.ardacelep.eventora.helpers.EventManagerHelpers;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,15 +37,15 @@ public class EventManager implements EventService {
     @Transactional
     public EventDto addEvent(EventDtoIU eventDtoIU) {
 
-        if (evManHelp.doesEventExist(eventDtoIU)) throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS,MessageFormat.format("event with the same name, venue and date already exists || name: {0} | venue: {1} | date: {2}",eventDtoIU.getName(),eventDtoIU.getVenue(),eventDtoIU.getDate()), HttpStatus.CONFLICT);;
+        if (evManHelp.doesEventExist(eventDtoIU)) throw new RuntimeBaseException(ErrorMessageType.RECORD_ALREADY_EXISTS,MessageFormat.format("event with the same name, venue and date already exists || name: {0} | venue: {1} | date: {2}",eventDtoIU.getName(),eventDtoIU.getVenue(),eventDtoIU.getDate()), HttpStatus.CONFLICT);
 
         Event newEvent = new Event();
 
         BeanUtils.copyProperties(eventDtoIU, newEvent);
 
-        Event dbEvent = eventDao.save(newEvent);
+        eventDao.save(newEvent);
 
-        return evManHelp.convertEventToDto(dbEvent);
+        return evManHelp.convertEventToDto(newEvent);
 
     }
 
@@ -57,7 +57,7 @@ public class EventManager implements EventService {
 
         if (optional.isEmpty()) {
             throw new RuntimeBaseException(ErrorMessageType.NO_RECORD_EXISTS,MessageFormat.format("searched in events for id: {0}",id), HttpStatus.NOT_FOUND);
-        };
+        }
 
         return evManHelp.convertEventToDto(optional.get());
     }
@@ -89,9 +89,9 @@ public class EventManager implements EventService {
 
         ReflectionUtils.copyNonNullProperties(updatedEvent, dbEvent);
 
-        Event newDbEvent = eventDao.save(dbEvent);
+        eventDao.save(dbEvent);
 
-        return evManHelp.convertEventToDto(newDbEvent);
+        return evManHelp.convertEventToDto(dbEvent);
 
     }
 

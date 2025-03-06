@@ -11,7 +11,7 @@ import com.ardacelep.eventora.enums.ErrorMessageType;
 import com.ardacelep.eventora.enums.TicketStatus;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
 import com.ardacelep.eventora.helpers.TicketManagerHelpers;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,7 +64,7 @@ public class TicketManager implements TicketService {
 
         ticket.setStatus(TicketStatus.AVAILABLE);
 
-        Ticket createdTicket = ticketDao.save(ticket);
+        ticketDao.save(ticket);
 
         return tickManHelp.convertTicketToDto(ticket, givenEvent);
 

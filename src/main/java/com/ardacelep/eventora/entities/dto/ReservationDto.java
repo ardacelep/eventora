@@ -1,6 +1,6 @@
 package com.ardacelep.eventora.entities.dto;
 
-import com.ardacelep.eventora.enums.ReservationStatus;
+import com.ardacelep.eventora.entities.enums.ReservationStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;

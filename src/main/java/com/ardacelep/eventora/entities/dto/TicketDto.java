@@ -1,7 +1,7 @@
 package com.ardacelep.eventora.entities.dto;
 
 
-import com.ardacelep.eventora.enums.TicketStatus;
+import com.ardacelep.eventora.entities.enums.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 

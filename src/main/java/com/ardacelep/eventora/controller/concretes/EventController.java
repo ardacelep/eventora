@@ -6,7 +6,7 @@ import com.ardacelep.eventora.entities.dto.EventDto;
 import com.ardacelep.eventora.entities.dto.EventDtoIU;
 import com.ardacelep.eventora.entities.dto.EventDtoUpdate;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/api/event")
+@RequiredArgsConstructor
 public class EventController implements IEventController {
 
-    @Autowired
-    EventService eventService;
+    private final EventService eventService;
 
     @Override
     @PostMapping("/add")
@@ -51,7 +51,7 @@ public class EventController implements IEventController {
 
     @Override
     @GetMapping("/search")
-    public List<EventDto> searchEvents(@RequestParam(required = true) String name) {
+    public List<EventDto> searchEvents(@RequestParam String name) {
         return eventService.searchEvents(name);
     }
 }

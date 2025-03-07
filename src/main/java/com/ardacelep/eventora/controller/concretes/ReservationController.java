@@ -6,7 +6,7 @@ import com.ardacelep.eventora.controller.abstracts.IReservationController;
 import com.ardacelep.eventora.entities.dto.ReservationDto;
 import com.ardacelep.eventora.entities.dto.ReservationDtoIU;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/api/reservation")
+@RequiredArgsConstructor
 public class ReservationController implements IReservationController {
 
-    @Autowired
-    ReservationService reservationService;
+    private final ReservationService reservationService;
 
     @Override
     @PostMapping("/reserve")

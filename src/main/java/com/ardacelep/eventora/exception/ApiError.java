@@ -1,6 +1,6 @@
 package com.ardacelep.eventora.exception;
 
-import com.ardacelep.eventora.enums.ErrorMessageType;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

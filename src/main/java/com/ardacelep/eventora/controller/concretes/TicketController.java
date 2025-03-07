@@ -6,7 +6,7 @@ import com.ardacelep.eventora.controller.abstracts.ITicketController;
 import com.ardacelep.eventora.entities.dto.TicketDto;
 import com.ardacelep.eventora.entities.dto.TicketDtoIU;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/api/ticket")
+@RequiredArgsConstructor
 public class TicketController implements ITicketController {
 
-    @Autowired
-    TicketService ticketService;
+    private final TicketService ticketService;
 
     @Override
     @PostMapping("/add")

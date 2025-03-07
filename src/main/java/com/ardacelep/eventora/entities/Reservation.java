@@ -1,6 +1,6 @@
 package com.ardacelep.eventora.entities;
 
-import com.ardacelep.eventora.enums.ReservationStatus;
+import com.ardacelep.eventora.entities.enums.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

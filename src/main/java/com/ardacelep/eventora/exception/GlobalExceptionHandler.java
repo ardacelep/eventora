@@ -1,8 +1,8 @@
 package com.ardacelep.eventora.exception;
 
-import com.ardacelep.eventora.enums.ErrorMessageType;
-import com.ardacelep.eventora.helpers.ExceptionHelpers;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
+import com.ardacelep.eventora.core.helpers.ExceptionHelpers;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -21,10 +21,10 @@ import java.util.Map;
 
 
 @ControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    @Autowired
-    private ExceptionHelpers exHelp;
+    private final ExceptionHelpers exHelp;
 
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

@@ -3,15 +3,13 @@ package com.ardacelep.eventora.entities.dto;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketDtoIU {

@@ -1,4 +1,4 @@
-package com.ardacelep.eventora.helpers;
+package com.ardacelep.eventora.core.helpers;
 
 import com.ardacelep.eventora.dataAccess.EventDao;
 import com.ardacelep.eventora.entities.Event;

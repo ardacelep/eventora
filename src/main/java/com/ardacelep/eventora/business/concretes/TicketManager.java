@@ -7,13 +7,13 @@ import com.ardacelep.eventora.entities.Event;
 import com.ardacelep.eventora.entities.Ticket;
 import com.ardacelep.eventora.entities.dto.TicketDto;
 import com.ardacelep.eventora.entities.dto.TicketDtoIU;
-import com.ardacelep.eventora.enums.ErrorMessageType;
-import com.ardacelep.eventora.enums.TicketStatus;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
+import com.ardacelep.eventora.entities.enums.TicketStatus;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
-import com.ardacelep.eventora.helpers.TicketManagerHelpers;
+import com.ardacelep.eventora.core.helpers.TicketManagerHelpers;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +25,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class TicketManager implements TicketService {
 
-    @Autowired
-    TicketDao ticketDao;
+    private final TicketDao ticketDao;
 
-    @Autowired
-    EventDao eventDao;
+    private final EventDao eventDao;
 
-    @Autowired
-    TicketManagerHelpers tickManHelp;
+    private final TicketManagerHelpers tickManHelp;
 
     @Override
     @Transactional

@@ -9,12 +9,11 @@ import com.ardacelep.eventora.entities.dto.EventDto;
 import com.ardacelep.eventora.entities.dto.EventDtoIU;
 
 import com.ardacelep.eventora.entities.dto.EventDtoUpdate;
-import com.ardacelep.eventora.enums.ErrorMessageType;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
-import com.ardacelep.eventora.helpers.EventManagerHelpers;
+import com.ardacelep.eventora.core.helpers.EventManagerHelpers;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +26,17 @@ import java.util.UUID;
 @Service
 public class EventManager implements EventService {
 
-    @Autowired
-    EventDao eventDao;
+    private final EventDao eventDao;
+    private final EventManagerHelpers evManHelp;
 
-    @Autowired
-    EventManagerHelpers evManHelp;
+    // sınıfın tek constructor'ı varsa spring @Autowired koymaya gerek olmadan kendisi consturctor
+    // injection ile constructor içindeki component'ları enjekte eder.
+    // elle yazmak yerine lombok'un 'final' ifadesine sahip değişkenler için constructor oluşturduğu
+    // @RequiredArgsConstructor anotasyonu da vardır.
+    public EventManager(EventDao eventDao, EventManagerHelpers evManHelp){
+        this.eventDao = eventDao;
+        this.evManHelp = evManHelp;
+    }
 
     @Override
     @Transactional

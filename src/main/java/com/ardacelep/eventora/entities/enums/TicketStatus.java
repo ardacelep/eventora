@@ -1,4 +1,4 @@
-package com.ardacelep.eventora.enums;
+package com.ardacelep.eventora.entities.enums;
 
 public enum TicketStatus {
 

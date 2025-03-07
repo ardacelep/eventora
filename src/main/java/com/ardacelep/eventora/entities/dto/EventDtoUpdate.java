@@ -1,18 +1,15 @@
 package com.ardacelep.eventora.entities.dto;
 
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class EventDtoUpdate {
 
     @Size(min = 3, max = 50, message = "name must be between 3 and 50 characters")

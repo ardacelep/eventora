@@ -1,16 +1,19 @@
 package com.ardacelep.eventora.entities.dto;
 
 
-import com.ardacelep.eventora.enums.TicketStatus;
+import com.ardacelep.eventora.entities.enums.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.*;
 
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TicketDto {
 
     private UUID id;

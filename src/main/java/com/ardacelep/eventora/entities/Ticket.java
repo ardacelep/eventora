@@ -1,16 +1,15 @@
 package com.ardacelep.eventora.entities;
 
-import com.ardacelep.eventora.enums.TicketStatus;
+import com.ardacelep.eventora.entities.enums.TicketStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ticket {

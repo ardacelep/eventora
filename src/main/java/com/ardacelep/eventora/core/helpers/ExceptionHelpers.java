@@ -1,6 +1,6 @@
-package com.ardacelep.eventora.helpers;
+package com.ardacelep.eventora.core.helpers;
 
-import com.ardacelep.eventora.enums.ErrorMessageType;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
 import com.ardacelep.eventora.exception.ApiError;
 import com.ardacelep.eventora.exception.Exception;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
@@ -94,7 +94,7 @@ public class ExceptionHelpers {
 
             }
             else {
-                errorsMap.put(fieldName, addMapValue(new ArrayList<String>(), objError.getDefaultMessage()));
+                errorsMap.put(fieldName, addMapValue(new ArrayList<>(), objError.getDefaultMessage()));
 
             }
         }

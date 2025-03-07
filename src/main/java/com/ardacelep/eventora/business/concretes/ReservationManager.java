@@ -7,15 +7,15 @@ import com.ardacelep.eventora.entities.Reservation;
 import com.ardacelep.eventora.entities.Ticket;
 import com.ardacelep.eventora.entities.dto.ReservationDto;
 import com.ardacelep.eventora.entities.dto.ReservationDtoIU;
-import com.ardacelep.eventora.enums.ErrorMessageType;
-import com.ardacelep.eventora.enums.ReservationStatus;
-import com.ardacelep.eventora.enums.TicketStatus;
+import com.ardacelep.eventora.entities.enums.ErrorMessageType;
+import com.ardacelep.eventora.entities.enums.ReservationStatus;
+import com.ardacelep.eventora.entities.enums.TicketStatus;
 import com.ardacelep.eventora.exception.RuntimeBaseException;
-import com.ardacelep.eventora.helpers.ReservationManagerHelpers;
+import com.ardacelep.eventora.core.helpers.ReservationManagerHelpers;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,16 +27,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReservationManager implements ReservationService {
 
-    @Autowired
-    ReservationDao reservationDao;
+    private final ReservationDao reservationDao;
 
-    @Autowired
-    TicketDao ticketDao;
+    private final TicketDao ticketDao;
 
-    @Autowired
-    ReservationManagerHelpers resManHelp;
+    private final ReservationManagerHelpers resManHelp;
 
     @PersistenceContext
     EntityManager entityManager;

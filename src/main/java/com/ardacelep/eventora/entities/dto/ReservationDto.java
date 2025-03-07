@@ -1,15 +1,14 @@
 package com.ardacelep.eventora.entities.dto;
 
-import com.ardacelep.eventora.enums.ReservationStatus;
+import com.ardacelep.eventora.entities.enums.ReservationStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

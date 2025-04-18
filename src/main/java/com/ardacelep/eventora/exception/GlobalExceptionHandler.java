@@ -26,7 +26,6 @@ public class GlobalExceptionHandler {
 
     private final ExceptionHelpers exHelp;
 
-
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError<Map<String, List<String>>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest webRequest) {
 

@@ -40,7 +40,7 @@ public class ExceptionHelpers {
 
         apiError.setErrorMessageType(errorMessageType);
 
-        com.ardacelep.eventora.exception.Exception<E> exception = new Exception<>();
+        Exception<E> exception = new Exception<>();
 
         exception.setCreatedAt(LocalDateTime.now());
 

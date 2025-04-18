@@ -26,7 +26,7 @@ public class TicketController implements ITicketController {
     }
 
     @Override
-    @GetMapping("find/{id}")
+    @GetMapping("/find/{id}")
     public TicketDto findTicketById(@PathVariable UUID id) {
         return ticketService.findTicketById(id);
     }
